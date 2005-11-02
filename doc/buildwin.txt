@@ -1,0 +1,76 @@
+*BuildWin.txt*	Provide a window to monitor the progress of a build
+
+Author: Jason Heddings (jason@heddings.com)
+For Vim version 6.0 and above
+Last change: 02 November, 2005
+
+1. Overview                                     |buildwin-about|
+2. Commands                                     |buildwin-commands|
+3. Configuration 				|buildwin-configure|
+
+==============================================================================
+                                                *buildwin-about*
+1. Overview~
+
+BuildWin allows you to view the progress of a build within the Vim instance.
+When a build is finished, it will automatically load the results into the 
+error list (see |quickfix|).
+
+In order to load the errors after a build is completed, the output from the
+build command is parsed using |'errorformat'| and loaded using the |:cgetfile|
+command.
+
+==============================================================================
+                                                *buildwin-commands*
+2. Commands~
+
+|:Build|    perform a build using specified arguments
+
+                                                *:Build*
+:Build <args>
+        This will begin a build, passing the specified arguments directly to
+        the |'makeprg'|, and causing the build window to appear.  If any
+        |quickfix| or preview windows are open, they will be closed.
+
+Once open, the window accepts all preview window commands.  For example, to
+close the preview window, use |:pclose|.
+
+==============================================================================
+                                                *buildwin-configure*
+2. Configuration~
+
+|'BuildWin_Height'|          the height of the build window [15]
+|'BuildWin_Position'|        the position of the build window ['botright']
+|'BuildWin_UpdateTime'|      the update interval [2000]
+|'BuildWin_FinishBehavior'|  the error list behavior [<none>]
+
+                                                *'BuildWin_Height'*
+BuildWin_Height~
+  Using this setting, you can alter the height of the build window that is
+  created when |:Build| is called.  >
+      let g:BuildWin_Height = 12
+<
+                                                *'BuildWin_Position'*
+BuildWin_Position~
+  Specify the position of the build window when it opens. >
+      let g:BuildWin_Position = "topleft"
+<
+
+                                                *'BuildWin_UpdateTime'*
+BuildWin_UpdateTime~
+  Specify the update interval for the build output.  This value is in
+  miliseconds. >
+      let g:BuildWin_UpdateTime = 500
+<
+                                                *'BuildWin_FinishBehavior'*
+BuildWin_FinishBehavior~
+  This option controls the behavior of the error list when a build has
+  finished.  Possible values include:
+    <none>    Do nothing
+    copen     Open the error list always |:copen|
+    cwindow   Only open the error list if recognized errors are found
+              Errors are recognized according to |'errorformat'| >
+      let g:BuildWin_FinishBehavior = "copen"
+>
+==============================================================================
+vim:textwidth=78:tabstop=8:noexpandtab:filetype=help

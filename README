@@ -1,0 +1,5 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1391
+
+BuildWin allows you to view the progress of a build within the Vim instance.  When a build is finished, it will automatically load the results into the error list.
+
+see ':help buildwin'
